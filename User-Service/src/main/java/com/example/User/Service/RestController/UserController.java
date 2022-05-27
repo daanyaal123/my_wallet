@@ -1,4 +1,4 @@
-package com.example.User.Service.Controller;
+package com.example.User.Service.RestController;
 
 import com.example.User.Service.Repository.UserRepository;
 
