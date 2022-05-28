@@ -7,15 +7,39 @@ public class UserValidator {
     public boolean validateUser(User user){
 
         // check if any of the value of the attribute of user is null 
-
-
-        return true;
+        return validateName(user.getName()) && validateName(user.getLastName()) && validatePhoneNumber(user.getMobile()) && validateEmail(user.getEmail());
     }
 
+    // function to validate name
     public boolean validateName(String name){
+        if(name==null || name==" "){
+            return false;
+        }
         for(int i=0;i<name.length();i++){
-            
+            if(!(name.charAt(i)>=65 && name.charAt(i)<=90) || !(name.charAt(i)>=97 && name.charAt(i)<=122) ){
+                return false;
+            }
         }
         return true;
     }
+
+    // function to validate Phone Number
+    public boolean validatePhoneNumber(String number){
+        if(number==null || number==" "){
+            return false;
+        }
+        if(number.length()!=10) return false;
+        for(int i=0;i<number.length();i++){
+            char ch=number.charAt(i);
+            if(!Character.isDigit(ch)) return false;
+        }
+        return true;
+    }
+
+    // function to validate if email id is valid or not
+    public boolean validateEmail(String email) {
+        if(email==null || email==" ") return false;
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
+     }
 }
