@@ -4,14 +4,14 @@ import com.example.User.Service.Entity.User;
 
 public class UserValidator {
     
-    public boolean validateUser(User user){
+    public static boolean validateUser(User user){
 
         // check if any of the value of the attribute of user is null 
         return validateName(user.getName()) && validateName(user.getLastName()) && validatePhoneNumber(user.getMobile()) && validateEmail(user.getEmail());
     }
 
     // function to validate name
-    public boolean validateName(String name){
+    public static boolean validateName(String name){
         if(name==null || name==" "){
             return false;
         }
@@ -24,7 +24,7 @@ public class UserValidator {
     }
 
     // function to validate Phone Number
-    public boolean validatePhoneNumber(String number){
+    public static boolean validatePhoneNumber(String number){
         if(number==null || number==" "){
             return false;
         }
@@ -37,7 +37,7 @@ public class UserValidator {
     }
 
     // function to validate if email id is valid or not
-    public boolean validateEmail(String email) {
+    public static boolean validateEmail(String email) {
         if(email==null || email==" ") return false;
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return email.matches(regex);

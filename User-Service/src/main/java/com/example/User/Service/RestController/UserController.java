@@ -1,6 +1,6 @@
 package com.example.User.Service.RestController;
 
-import com.example.User.Service.Repository.UserRepository;
+import com.example.User.Service.Service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import com.example.User.Service.Entity.User;
-import com.example.User.Service.Exception.UserNotFound;
 
 @RestController
 public class UserController {
-    
+
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping("/users")
     List<User> findAll(){
-        return userRepository.findAll();
+        return userService.findAll();
+        //return userRepository.findAll();
     }
 
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     User addUser (@RequestBody User newUser){
-        return userRepository.save(newUser);
+        return userService.addUser(newUser);
     }
 
     @GetMapping("/users/{id}")
     User findById (@PathVariable int id){
-        return userRepository.findById(id).orElseThrow(()-> new UserNotFound(id));
+        return userService.findById(id);
     }
 }

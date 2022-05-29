@@ -3,7 +3,10 @@ package com.example.User.Service.Service;
 import java.util.List;
 
 import com.example.User.Service.Entity.User;
+import com.example.User.Service.Exception.InvalidUser;
+import com.example.User.Service.Exception.UserNotFound;
 import com.example.User.Service.Repository.UserRepository;
+import com.example.User.Service.UserValidator.UserValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,14 +22,15 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User addUser(User theUser) {
-        // TODO Auto-generated method stub
-        return null;
+        if(UserValidator.validateUser(theUser)){
+            return userRepository.save(theUser);
+        }
+        else throw new InvalidUser();
     }
 
     @Override
     public User findById(int id) {
-        // TODO Auto-generated method stub
-        return null;
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFound(id));
     }
     
 }
